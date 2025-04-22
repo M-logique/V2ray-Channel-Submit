@@ -40,6 +40,13 @@ for line in BODY.splitlines():
             channel_ids.append(matched.group(1))
 
 for channel_id in channel_ids:
+    with open("channels.txt") as fp:
+        prev_channel_ids = [line.strip().lower() for line in fp]
+
+    if channel_id.strip().lower() in prev_channel_ids:
+        continue
+
+    
     messages = tg_channel_messages(channel_id)
     if not messages:
         invalid_channel_ids.append(channel_id)
