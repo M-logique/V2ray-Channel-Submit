@@ -52,11 +52,13 @@ jobs:
             USER_EMAIL="${{github.event.issue.user.login}}@users.noreply.github.com"
           
             git add channels.txt
+            git config user.name "$USERNAME"
+            git config user.email "$USER_EMAIL"
 
             if git diff --cached --quiet; then
               echo "No changes to commit."
             else
-              git commit --author $USERNAME <$USER_EMAIL> -m "Update channels.txt"
+              git commit -m "Update channels.txt"
               git push
             fi
       
