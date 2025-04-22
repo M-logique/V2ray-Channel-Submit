@@ -1,0 +1,36 @@
+name: Delete Commit History
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository Contents
+        uses: actions/checkout@v4
+
+      - name: Clean Up Files
+        run: |
+          git config user.name "M-logique"
+          git config user.email "M-logique@users.noreply.github.com"
+          
+          # Create an orphan branch to start fresh
+          git checkout --orphan latest_branch
+          
+          # Remove all files from the new branch
+          git rm -r --cached .
+          
+          # Add all files back (including the .gitignore and .gitattributes, etc.)
+          git add .
+          
+          # Create an initial commit
+          git commit -am "Initial commit"
+          
+          git branch -D main
+          git branch -m main
+          
+          git push -f origin main
