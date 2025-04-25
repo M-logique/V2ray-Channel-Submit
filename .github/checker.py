@@ -78,4 +78,5 @@ with open(environ['GITHUB_ENV'], 'a') as f:
 
 
 with open("channels.txt", "a") as fp:
+    fp.write("\n")
     fp.write("\n".join(valid_channel_ids))
