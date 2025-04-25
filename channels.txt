@@ -1,1 +1,2 @@
-V2ray1_Ngfreedom_guard_net
+V2ray1_Ng
+freedom_guard_net
